@@ -15,10 +15,11 @@ function getMovies(searchText) {
             let movies = response.data.Search;
             let output = '';
             $.each(movies, (index, movie) => {
+                let posterUrl = `http://img.omdbapi.com/?apikey=2aca07a9&i=${movie.imdbID}`;
                 output += `
                     <div class = "col-md-3">
                         <div class="well text-center">
-                            <img src="${movie.Poster}">
+                            <img src="${posterUrl}">
                             <h5>${movie.Title}</h5>
                             <a onclick="movieSelected('${movie.imdbID}')" class="btn btn-primary" href="#">Movie Detail</a>
                         </div>
