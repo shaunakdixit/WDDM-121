@@ -5,3 +5,9 @@ $(document).ready(() => {
         e.preventDefault();
     });
 });
+
+function movieSelected(id) {
+    sessionStorage.setItem('imdbID', id);
+    window.location = 'movie.html';
+    return false;
+}
