@@ -9,7 +9,7 @@ $(document).ready(() => {
 
 function getMovies(searchText) {
     console.log(searchText);
-    axios.get('http://www.omdbapi.com/?i=tt3896198&apikey=b1b5d454' + '&s=' + searchText)
+    axios.get('http://www.omdbapi.com/?i=tt3896198&apikey=2aca07a9' + '&s=' + searchText)
         .then((response) => {
             console.log(response);
             let movies = response.data.Search;
@@ -20,7 +20,7 @@ function getMovies(searchText) {
                         <div class="well text-center">
                             <img src="${movie.Poster}">
                             <h5>${movie.Title}</h5>
-                            <a onclick="movieSelected('${movie.imdbID})" class="btn btn-primary" href="movie.html">Movie Detail</a>
+                            <a onclick="movieSelected('${movie.imdbID}')" class="btn btn-primary" href="#">Movie Detail</a>
                         </div>
                     </div>
                 `;
@@ -40,7 +40,7 @@ function movieSelected(id) {
 function getMovie() {
     let movieId = sessionStorage.getItem('imdbID');
 
-    axios.get('http://img.omdbapi.com/?i=tt3896198&apikey=b1b5d454' + '&i=' + movieId)
+    axios.get('http://www.omdbapi.com/?apikey=2aca07a9' + '&i=' + movieId)
         .then((response) => {
             console.log(response);
             let movie = response.data;
@@ -69,7 +69,8 @@ function getMovie() {
                         <h3>Plot</h3>
                         ${movie.Plot}
                         <hr>
-                        <a href = "hhtp://imdb.com/title/${movie.imdbID}" target="_blank" class="btn btn-primary">View IMDB</a>
+                        <a onclick="downloadMovie('${movie.imdbID}')" target="_blank" class="btn btn-primary mr-2">Download Movie</a>
+                        <a href = "http://imdb.com/title/${movie.imdbID}" target="_blank" class="btn btn-primary">View IMDB</a>
                         <a href="index.html" class="btn btn-default">Go Back To Search</a>
                     </div>
                 </div>
@@ -78,4 +79,13 @@ function getMovie() {
         }).catch((err) => {
         console.log(err);
     });
+}
+
+function downloadMovie(id) {
+    const link = document.createElement('a');
+    link.href = 'https://github.com/shaunakdixit/WDDM-121/blob/main/Assets/freeVideo.mp4?raw=true';
+    link.download = 'DownloadedMovie.mp4';
+    document.body.appendChild(link);
+    link.click();
+    document.body.removeChild(link);
 }
